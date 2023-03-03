@@ -67,8 +67,7 @@ export default class LocationPicker extends FlowComponent {
         if(typeof google === 'undefined' || typeof google.maps === 'undefined') {
             if(typeof (window as any).GoogleMapsLoading === 'undefined') {
                 const script = document.createElement('script');
-                const apiKey = this.getAttribute('apiKey', 'AIzaSyDu2kyyUHEzYcIZHB3SIgMdxu7OocJwap8');
-                //script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&libraries=places';
+                const apiKey = this.getAttribute('apiKey');
                 script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&libraries=places&callback=Function.prototype';
                 script.addEventListener('load', this.apiLoaded);
                 window.document.body.appendChild(script);
