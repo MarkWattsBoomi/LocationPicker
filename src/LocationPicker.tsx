@@ -137,7 +137,8 @@ export default class LocationPicker extends FlowComponent {
             for (let i = 0; i < results.results.length; i++) {
                 createMarker(this,this.map,results.results[i]);
             }
-            this.currentPosition = results.results[0].geometry.location
+            this.currentPosition = results.results[0].geometry.location;
+            // TO-DO save this to state
             this.map?.setZoom(15);
             this.map?.setCenter(this.currentPosition);
         }          
