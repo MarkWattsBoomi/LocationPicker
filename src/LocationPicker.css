@@ -1,0 +1,62 @@
+.locpic {
+    display: flex;
+    flex-direction: column;
+}
+
+.locpic-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.locpic-header-title {
+    font-size: 1rem;
+    color: #2054d3;
+}
+
+.locpic-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.locpic-body-left {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+}
+
+.locpic-body-right {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+}
+
+.locpic-body-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.locpic-body-row-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.locpic-body-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000;
+    margin-right: 1rem;
+}
+
+.locpic-body-input {
+    font-size: 1rem !important;
+    padding: 0 0.5rem 0 0.5rem !important;
+    border: 1px solid #000 !important;
+    position: relative;
+}
+
+.locpic-body-btn {
+    font-size: 1rem !important;
+    position: absolute;
+    margin: auto auto auto -1.5rem;
+}
