@@ -31,6 +31,7 @@ export default class LocationPicker extends FlowComponent {
         this.addressKeyDown = this.addressKeyDown.bind(this);
         this.prep = this.prep.bind(this);
         this.processResults = this.processResults.bind(this);
+        this.zoomChanged = this.zoomChanged.bind(this);
         this.setMarker = this.setMarker.bind(this);
         this.addressSearch = this.addressSearch.bind(this);
         
@@ -67,7 +68,7 @@ export default class LocationPicker extends FlowComponent {
         if(typeof google === 'undefined' || typeof google.maps === 'undefined') {
             if(typeof (window as any).GoogleMapsLoading === 'undefined') {
                 const script = document.createElement('script');
-                const apiKey = this.getAttribute('apiKey');
+                const apiKey = this.getAttribute('apiKey',"AIzaSyDu2kyyUHEzYcIZHB3SIgMdxu7OocJwap8");
                 script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&libraries=places&callback=Function.prototype';
                 script.addEventListener('load', this.apiLoaded);
                 window.document.body.appendChild(script);
@@ -86,16 +87,33 @@ export default class LocationPicker extends FlowComponent {
     // fires when the maps script has loaded
     async apiLoaded() {
         this.googleLoaded = true;
-        this.currentPosition = await getCurrentLocation();
+        let state: FlowObjectData = this.model.dataSource.items[0];
+            if(state){
+                if(state.properties["latitude"].value){
+                    this.currentPosition =  new google.maps.LatLng(state.properties["latitude"].value, state.properties["longitude"].value)
+                }
+                else {
+                    this.currentPosition = await getCurrentLocation();
+                }
+            }
+        let zoom: number = parseInt(sessionStorage.getItem(this.componentId + "-zoom") || this.getAttribute("zoom","8"));
+        console.log("apiLoaded:zoom=" + zoom);
+        sessionStorage.setItem(this.componentId + "-zoom",zoom+"");
         this.map = new google.maps.Map(document.getElementById("map") as HTMLElement ,{
             center: this.currentPosition,
-            zoom: parseInt(this.getAttribute("zoom","8")),
+            zoom: zoom,
         });
         google.maps.event.addListener(this.map,"click",this.setMarker);
-        this.setMarker(this.currentPosition);
+        google.maps.event.addListener(this.map,'zoom_changed',this.zoomChanged);
+        this.setMarker(this.currentPosition, true);
     }
 
-    setMarker(e: any) {
+    zoomChanged(e: any) {
+        sessionStorage.setItem(this.componentId + "-zoom",this.map.getZoom() + "");
+        console.log("zoomChanged:zoom=" + this.map.getZoom());
+    }
+
+    async setMarker(e: any, suppress: boolean = false) {
         if(e.lat && e.lng) {
             this.currentPosition = e;
         }
@@ -105,6 +123,19 @@ export default class LocationPicker extends FlowComponent {
         
         this.marker?.setMap(null);
         this.marker = createMarker(this,this.map,this.currentPosition);
+        // update state value
+        let state: FlowObjectData = this.model.dataSource.items[0];
+        state.properties["latitude"].value = this.currentPosition.lat();
+        state.properties["longitude"].value = this.currentPosition.lng();
+        console.log("lat=" + this.currentPosition.lat() + " lng=" + this.currentPosition.lng());
+        await this.setStateValue(state);
+        
+        if(this.outcomes["onSelect"]){
+            if(suppress !== true){
+                await this.triggerOutcome("onSelect");
+            }
+        }
+        
         this.forceUpdate();
     }
 
@@ -138,8 +169,9 @@ export default class LocationPicker extends FlowComponent {
                 createMarker(this,this.map,results.results[i]);
             }
             this.currentPosition = results.results[0].geometry.location;
-            // TO-DO save this to state
-            this.map?.setZoom(15);
+            let zoom: number = parseInt(sessionStorage.getItem(this.componentId + "-zoom") || this.getAttribute("zoom","8"));
+            console.log("processResults:zoom=" + zoom);
+            this.map?.setZoom(zoom);
             this.map?.setCenter(this.currentPosition);
         }          
     }

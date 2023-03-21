@@ -1,0 +1,42 @@
+{
+  "attributes": {
+    "zoom": "The default map zoom location 1-20. default is 8",
+    "apiKey": "A google maps API key"
+  },
+  "configurationEditors": [
+    "WIDTH",
+    "HEIGHT"
+  ],
+  "dateCreated": "2023-03-21T15:35:09.4828817+00:00",
+  "dateModified": "2023-03-21T15:35:09.4829341+00:00",
+  "designTimeImageURL": null,
+  "designTimeRenderType": null,
+  "developerName": "Location Picker",
+  "developerSummary": "Interactive map",
+  "elementType": "CUSTOM_PAGE_COMPONENT",
+  "icon": "MapPin",
+  "id": "a2cd19c0-842a-48c1-bfd5-25ebc449b60c",
+  "key": "locationpicker",
+  "legacyScriptURL": "https://master-boomi-flow-assets-prod-us-east-1.s3.amazonaws.com/6f1626d3-fe9a-425e-9728-0979242019ed/locpick.js",
+  "legacyStyleSheetURL": "https://master-boomi-flow-assets-prod-us-east-1.s3.amazonaws.com/6f1626d3-fe9a-425e-9728-0979242019ed/locpick.css",
+  "scriptURL": null,
+  "styleSheetURL": null,
+  "whoCreated": {
+    "email": "markwatts@boomi.com",
+    "firstName": "Mark",
+    "id": "22dcefc8-b407-4974-8044-327cb44b134e",
+    "lastName": "Watts"
+  },
+  "whoModified": {
+    "email": "markwatts@boomi.com",
+    "firstName": "Mark",
+    "id": "22dcefc8-b407-4974-8044-327cb44b134e",
+    "lastName": "Watts"
+  },
+  "whoOwner": {
+    "email": "markwatts@boomi.com",
+    "firstName": "Mark",
+    "id": "22dcefc8-b407-4974-8044-327cb44b134e",
+    "lastName": "Watts"
+  }
+}
