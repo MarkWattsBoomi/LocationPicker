@@ -3,8 +3,17 @@ import LocationPicker from "./LocationPicker";
 import React from "react";
 
 export async function getCurrentLocation(options?: any): Promise<google.maps.LatLng> {
-    let pos: any = await _getCurrentLocation(options);
-    let loc: google.maps.LatLng = new google.maps.LatLng({lat: pos.coords.latitude, lng: pos.coords.longitude});
+    let pos: any;
+    let loc: google.maps.LatLng;
+    try {
+        pos = await _getCurrentLocation(options);
+        loc = new google.maps.LatLng({lat: pos.coords.latitude, lng: pos.coords.longitude});
+    }
+    catch(e) {
+        console.log("loc barred");
+        loc = new google.maps.LatLng({lat: 51.09, lng: 3.687});
+    }
+    
     return loc;
 }
 
