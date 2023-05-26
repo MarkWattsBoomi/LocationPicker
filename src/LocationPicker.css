@@ -1,6 +1,8 @@
 .locpic {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    position: relative;
 }
 
 .locpic-header {
@@ -15,25 +17,21 @@
 
 .locpic-body {
     display: flex;
-    flex-direction: row;
-}
-
-.locpic-body-left {
-    display: flex;
     flex-direction: column;
-    flex-basis: 50%;
-}
-
-.locpic-body-right {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 50%;
+    position: relative;
 }
 
 .locpic-body-row {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.locpic-body-map {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
 }
 
 .locpic-body-row-group {
@@ -53,10 +51,16 @@
     padding: 0 0.5rem 0 0.5rem !important;
     border: 1px solid #000 !important;
     position: relative;
+    width: 100%;
 }
 
 .locpic-body-btn {
     font-size: 1rem !important;
     position: absolute;
     margin: auto auto auto -1.5rem;
+}
+
+.locpic-map {
+    width: 50vw;
+    height: 30vw;
 }

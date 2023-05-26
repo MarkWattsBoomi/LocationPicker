@@ -209,78 +209,41 @@ export default class LocationPicker extends FlowComponent {
                     className='locpic-body'
                 >
                     <div
-                        className='locpic-body-left'
+                        className='locpic-body-row'
                     >
-                        <div
-                            className='locpic-body-row'
+                        <label
+                            className='locpic-body-label'
+                            htmlFor="street"
                         >
-                            <label
-                                className='locpic-body-label'
-                                htmlFor="street"
-                            >
-                                Address Line
-                            </label>
-                            <div
-                                className='locpic-body-row-group'
-                            >
-                                <input 
-                                    className='locpic-body-input'
-                                    id='street'
-                                    type="text"
-                                    ref={(element: HTMLInputElement) => { this.street = element}}
-                                    style={{width: "20rem"}}
-                                    onKeyDown={this.addressKeyDown}
-                                />
-                                <span  
-                                    className="locpic-body-btn glyphicon glyphicon-search" 
-                                    onClick={this.addressSearch}
-                                />
-                            </div>
-                            
-                        </div>
+                            Search
+                        </label>
                         <div
-                            className='locpic-body-row'
+                            className='locpic-body-row-group'
                         >
-                            <label
-                                className='locpic-body-label'
-                                htmlFor="street"
-                            >
-                                Country + City
-                            </label>
-                            <div
-                                className='locpic-body-row-group'
-                            >
-                                <select 
-                                    className='locpic-body-select'
-                                    id='country'
-                                    ref={(element: HTMLSelectElement) => { this.country = element}}
-                                    style={{}}
-                                >
-                                    {this.countries}
-                                </select>
-                                <select 
-                                    className='locpic-body-select'
-                                    id='city'
-                                    ref={(element: HTMLSelectElement) => { this.city = element}}
-                                    style={{}}
-                                >
-                                    {this.cities}
-                                </select>
-                            </div>
-                            
+                            <input 
+                                className='locpic-body-input'
+                                id='street'
+                                type="text"
+                                ref={(element: HTMLInputElement) => { this.street = element}}
+                                onKeyDown={this.addressKeyDown}
+                            />
+                            <span  
+                                className="locpic-body-btn glyphicon glyphicon-search" 
+                                onClick={this.addressSearch}
+                            />
                         </div>
                     </div>
                     <div
-                        className='locpic-body-right'
+                        className='locpic-body-map'
                     >
                         <div 
-                            style={{width:"30vw", height: "30vh"}}
+                            className='locpic-map'
                             id="map"
                         />
-                        <div>
-                            <span className='locpic-body-label'>{this.currentPosition? "Latitude: " + this.currentPosition?.lat() : ""}</span>
-                            <span className='locpic-body-label'>{this.currentPosition? "Longitude: " + this.currentPosition?.lng() : ""}</span>
-                        </div>
+                    </div>
+                    <div>
+                        <span className='locpic-body-label'>{this.currentPosition? "Latitude: " + this.currentPosition?.lat() : ""}</span>
+                        <span className='locpic-body-label'>{this.currentPosition? "Longitude: " + this.currentPosition?.lng() : ""}</span>
                     </div>
                 </div>
             </div>
